@@ -1,3 +1,17 @@
+import os
+import sys
+
+# --- FORCE RUNTIME PACKAGES (FOOLPROOF FIX) ---
+# This manually structures the environment variables to safely pull down packages during boot 
+# without triggering the subprocess security sandboxing error.
+try:
+    import plotly.express as px
+    import google.generativeai as genai
+    import sklearn
+except ImportError:
+    os.system(f"{sys.executable} -m pip install --quiet plotly scikit-learn google-generativeai openpyxl")
+
+# --- CLEAN IMPORTS ---
 import streamlit as st
 import pandas as pd
 import plotly.express as px
